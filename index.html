@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>JavaScript Quiz</title>
+        <link rel="stylesheet" href="./Assets/css/style.css">
+    </head>
+    
+    <body>
+        <!--header-->
+        <header>
+            <div id = "highscores"><button>Check Highscores</button></a></div>
+            <p>Time: <span id="time">100</span></p>
+        </header>    
+            
+        <!--main-->
+        <main>
+        <section class="container">
+            <div id="start-quiz">
+                <h2>Test your JavaScript Knowledge!</h2>
+                <p></p>
+                <h4>Click below to start the quiz!</h4>
+                <button id="start-button">Start</button>
+            </div>
+                
+        <!--question and answer-->
+        <div class ="quiz-questions hide">
+            <h2 id="question-display">Question</h2>
+            <div class ="answer-buttons">
+                <button id = "answerA" value="0">A</button>
+                <button id = "answerB" value="1">B</button>
+                <button id = "answerC" value="2">C</button>
+                <button id = "answerD" value="3">D</button>
+            </div>
+            <br>
+            <div id="correct-incorrect" class="correct">Correct!</div>
+        </div>                    
+
+        <!--quiz complete-->
+        <div class ="endscreen hide">
+            <h4>Quiz Complete!</h4>
+            <p>Your Score: <span id="score"></span></p>
+            <form id="scoreboard">
+                <p>Enter initials:</p> <input type="text" id="intials" max="3" />
+                <button id="submit">Submit</button>
+            </form>
+        </div>
+        
+        <!--High Scores-->
+        <div class="highscores hide">
+            <h4>High Scores</h4>
+            <ol id="scores"></ol>
+            <div id="score-buttons">
+                <button id="return">Return to Start</button>
+                <button id="reset">Reset High Scores</button>
+            </div>
+        </div>
+        </section>
+        </main>
+
+        <script src="./Assets/js/script.js"></script>
+    </body>
+</html>
