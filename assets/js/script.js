@@ -31,64 +31,84 @@ const questionOptions = [
   },
 ];
 
-//start page//
+
 var startButton = document.getElementById ("start-button");
-  var quizStart = document.getElementById ("start-quiz");
-  var quizQuestions = document.querySelector(".quiz-questions"); 
+var quizStart = document.getElementById ("start-quiz");
+var quizQuestions = document.querySelector(".quiz-questions"); 
+var timeEl = document.querySelector("#time")
+var time = 30
+var endscreen = document.querySelector(".endscreen");
+var score = 0
+var scoreSpan = document.getElementById ("score");
+var submitButton = document.getElementById ("submit");
 
-//first page change & questions//
 
-  startButton.addEventListener ("click", startQuiz)
+//start page first page change & questions//
+var questionIndex = 0
+var questionDisplay = document.getElementById ("question-display");
   function startQuiz() {
+    var answerA = document.getElementById("answerA");
+    var answerB = document.getElementById("answerB");
+    var answerC = document.getElementById("answerC");
+    var answerD = document.getElementById("answerD");
+
+    questionDisplay.innerHTML = ""
     quizStart.classList.add ("hide")
     quizQuestions.classList.remove ("hide")
-    questionDisplay.textContent = questionOptions[0].question
-    answerA.textContent = questionOptions[0].options[0]
-    answerB.textContent = questionOptions[0].options[1]
-    answerC.textContent = questionOptions[0].options[2]
-    answerD.textContent = questionOptions[0].options[3]
+    questionDisplay.textContent = questionOptions[questionIndex].question
+    answerA.textContent = questionOptions[questionIndex].options[0]
+    answerB.textContent = questionOptions[questionIndex].options[1]
+    answerC.textContent = questionOptions[questionIndex].options[2]
+    answerD.textContent = questionOptions[questionIndex].options[3]
+    answerA.addEventListener ("click", displayQuestion)
+    answerB.addEventListener ("click", displayQuestion)
+    answerC.addEventListener ("click", displayQuestion)
+    answerD.addEventListener ("click", displayQuestion)
+    }
+
+  function displayQuestion(event) {
+    event.preventDefault ()
+    let currentQuestion = questionOptions[questionIndex];
+    console.log (event.target)
+    let answerOptions = currentQuestion.options;
+    let correctAnswer = answerOptions [currentQuestion.answer -1]
+    console.log(correctAnswer)
+      if (event.target.innerHTML === correctAnswer) {
+        questionIndex ++
+        score ++
+        startQuiz () 
+      } else {
+        time -= 10;
+        questionIndex +10;
+        startQuiz
+      }
   }
 
-  var questionDisplay = document.getElementById ("question-display");
-  var questionIdx = 0
-  var answerA = document.getElementById("answerA");
-  var answerB = document.getElementById("answerB");
-  var answerC = document.getElementById("answerC");
-  var answerD = document.getElementById("answerD");
-
-  answerA.addEventListener ("click", displayQuestion)
-  answerB.addEventListener ("click", displayQuestion)
-  answerC.addEventListener ("click", displayQuestion)
-  answerD.addEventListener ("click", displayQuestion)
-
-  function displayQuestion() {
-    const currentQuestion = questionOptions[questionIdx];
-
-    //check correct answers before the index increments
-    
-    const answerOptions = currentQuestion.options;
-    questionIdx ++
-    questionDisplay.textContent = currentQuestion.question
-      answerA.textContent = currentQuestion.options[0]
-      answerB.textContent = currentQuestion.options[1]
-      answerC.textContent = currentQuestion.options[2]
-      answerD.textContent = currentQuestion.options[3]
-
-}
-
-//need to add eventlistener for quiz end. and for timer and local storage still needs to be fixed
-
-
-function endQuiz() {
-  clearInterval(timerInterval); 
-  timerEl.textContent = 0; 
-    if (secondsLeft < 0) {
-      secondsLeft = 0;
+  function goToEndScreen() {
+    // add the hide class to the question div
+    quizQuestions.classList.add ("hide")
+    // remove the hide class from the endscreen div
+    endscreen.classList.remove ("hide")
+    scoreSpan.innerText = score
   }
 
-  finalScore.textContent = secondsLeft;
-  
+submitButton.addEventListener ("click", function(event) {
+  event.preventDefault();
+  var intials = document.getElementById("intials").value 
+  console.log (intials)
+  // get existing data from localStorage
+  // add new data to the existing data
+  // store data in localStorage
+})
 
+
+function init (){
+  quizTime ()
+  startQuiz()
 }
 
 
+
+
+
+startButton.addEventListener ("click", init)
