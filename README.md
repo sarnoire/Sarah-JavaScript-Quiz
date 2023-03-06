@@ -4,8 +4,8 @@ This fourth challenge was to create a JavaScript Quiz to test knowledge against 
 
 <strong>Links</strong>
 <ul>
-  <li>Deployed Site: </li>
-  <li>Repository: </li>
+  <li>Deployed Site: https://sarnoire.github.io/Sarah-JavaScript-Quiz/  </li>
+  <li>Repository: https://github.com/sarnoire/Sarah-JavaScript-Quiz </li>
 </ul>	
 
 <strong>Images</strong>
