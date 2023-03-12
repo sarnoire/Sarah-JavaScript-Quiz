@@ -19,9 +19,9 @@ const questionOptions = [
   },
 
   {
-    question: "10 - Which of the following function of Array object reverses the order of the elements of an array?",
+    question: "Which of the following function of Array object reverses the order of the elements of an array?",
     options: ["A - reverse()", "B - push()", "C - reduce()", "D - reduceRight()"],
-    answer: 3
+    answer: 1
   },
 
   {
@@ -31,84 +31,93 @@ const questionOptions = [
   },
 ];
 
-
-var startButton = document.getElementById ("start-button");
-var quizStart = document.getElementById ("start-quiz");
+var startButton = document.getElementById("start-button");
+var quizStart = document.getElementById("start-quiz");
 var quizQuestions = document.querySelector(".quiz-questions"); 
-var timeEl = document.querySelector("#time")
-var time = 30
+var timeEl = document.querySelector("#time");
+var time = 60;
 var endscreen = document.querySelector(".endscreen");
-var score = 0
-var scoreSpan = document.getElementById ("score");
-var submitButton = document.getElementById ("submit");
-
+var score = 0;
+var scoreSpan = document.getElementById("score");
+var submitButton = document.getElementById("submit");
 
 //start page first page change & questions//
-var questionIndex = 0
-var questionDisplay = document.getElementById ("question-display");
-  function startQuiz() {
-    var answerA = document.getElementById("answerA");
-    var answerB = document.getElementById("answerB");
-    var answerC = document.getElementById("answerC");
-    var answerD = document.getElementById("answerD");
+var questionIndex = 0;
+var questionDisplay = document.getElementById("question-display");
 
-    questionDisplay.innerHTML = ""
-    quizStart.classList.add ("hide")
-    quizQuestions.classList.remove ("hide")
-    questionDisplay.textContent = questionOptions[questionIndex].question
-    answerA.textContent = questionOptions[questionIndex].options[0]
-    answerB.textContent = questionOptions[questionIndex].options[1]
-    answerC.textContent = questionOptions[questionIndex].options[2]
-    answerD.textContent = questionOptions[questionIndex].options[3]
-    answerA.addEventListener ("click", displayQuestion)
-    answerB.addEventListener ("click", displayQuestion)
-    answerC.addEventListener ("click", displayQuestion)
-    answerD.addEventListener ("click", displayQuestion)
-    }
+function startQuiz() {
+  var answerA = document.getElementById("answerA");
+  var answerB = document.getElementById("answerB");
+  var answerC = document.getElementById("answerC");
+  var answerD = document.getElementById("answerD");
 
-  function displayQuestion(event) {
-    event.preventDefault ()
-    let currentQuestion = questionOptions[questionIndex];
-    console.log (event.target)
-    let answerOptions = currentQuestion.options;
-    let correctAnswer = answerOptions [currentQuestion.answer -1]
-    console.log(correctAnswer)
-      if (event.target.innerHTML === correctAnswer) {
-        questionIndex ++
-        score ++
-        startQuiz () 
-      } else {
-        time -= 10;
-        questionIndex +10;
-        startQuiz
-      }
-  }
-
-  function goToEndScreen() {
-    // add the hide class to the question div
-    quizQuestions.classList.add ("hide")
-    // remove the hide class from the endscreen div
-    endscreen.classList.remove ("hide")
-    scoreSpan.innerText = score
-  }
-
-submitButton.addEventListener ("click", function(event) {
-  event.preventDefault();
-  var intials = document.getElementById("intials").value 
-  console.log (intials)
-  // get existing data from localStorage
-  // add new data to the existing data
-  // store data in localStorage
-})
-
-
-function init (){
-  quizTime ()
-  startQuiz()
+  questionDisplay.innerHTML = "";
+  quizStart.classList.add("hide");
+  quizQuestions.classList.remove("hide");
+  questionDisplay.textContent = questionOptions[questionIndex].question;
+  answerA.textContent = questionOptions[questionIndex].options[0];
+  answerB.textContent = questionOptions[questionIndex].options[1];
+  answerC.textContent = questionOptions[questionIndex].options[2];
+  answerD.textContent = questionOptions[questionIndex].options[3];
+  answerA.addEventListener("click", displayQuestion);
+  answerB.addEventListener("click", displayQuestion);
+  answerC.addEventListener("click", displayQuestion);
+  answerD.addEventListener("click", displayQuestion);
 }
 
+function displayQuestion(event) {
+  event.preventDefault();
+  let currentQuestion = questionOptions[questionIndex];
+  let answerOptions = currentQuestion.options;
+  let correctAnswer = answerOptions[currentQuestion.answer - 1];
+  
+  if (event.target.innerHTML === correctAnswer) {
+    questionIndex++;
+    score++;
+    startQuiz();
+  } else {
+    time -= 10;
+    questionIndex++;
+    startQuiz();
+  }
+  
+  if (questionIndex === questionOptions.length) {
+    goToEndScreen();
+  }
+}
 
+function goToEndScreen() {
+  quizQuestions.classList.add("hide");
+  endscreen.classList.remove("hide");
+  scoreSpan.innerText = score
+}
 
+submitButton.addEventListener("click", function(event) {
+  event.preventDefault();
+  var initials = document.getElementById("initials").value;
+  console.log(initials);
+  
+  // Get existing data from localStorage, or initialize an empty array
+  var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
 
+  // Add new score to the array
+  highScores.push({ initials: initials, score: score });
 
-startButton.addEventListener ("click", init)
+  // Sort the array in descending order based on score
+  highScores.sort(function(a, b) {
+    return b.score - a.score;
+  });
+
+  // Store the updated array in localStorage
+  localStorage.setItem("highScores", JSON.stringify(highScores));
+
+  // Redirect to the high scores page
+  window.location.href = "high-scores.html";
+});
+
+function init() {
+  quizTime();
+  startQuiz();
+}
+
+startButton.addEventListener("click", init);
