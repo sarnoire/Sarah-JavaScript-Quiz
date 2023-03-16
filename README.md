@@ -27,12 +27,12 @@ List of resources used to complete this project:
 New resources for resumbit:
 <ul>
 	<li>Multiple tutoring sessions through bootcamp</li>
-	<li>hhttps://stackdiary.com/guides/typeerror-cannot-read-property-of-undefined/#:~:text=To%20fix%20this%20error%2C%20you,it%20later%20in%20your%20code.</li>
-	<li></li>
-	<li></li>
-	<li></li>
-	<li></li>
-	<li></li>
-</ul
+	<li>https://stackdiary.com/guides/typeerror-cannot-read-property-of-undefined/#:~:text=To%20fix%20this%20error%2C%20you,it%20later%20in%20your%20code.</li>
+	<li>https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event#examples</li>
+	<li>https://developer.mozilla.org/en-US/docs/Web/API/clearInterval</li>
+	<li>https://javascript.info/settimeout-setinterval</li>
+	<li>https://www.w3schools.com/jsref/met_win_clearinterval.asp</li>
+	<li>https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined</li>
+</ul>
 	
 
