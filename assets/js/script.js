@@ -1,4 +1,4 @@
-//questions & arrays//
+//questions array//
 const questionOptions = [
   {
     question: "How can you get the total number of arguments passed to a function?",
@@ -38,7 +38,7 @@ var timeEl = document.querySelector("#time");
 var time = 60;
 var endscreen = document.querySelector(".endscreen");
 var score = 0;
-var scoreSpan = document.getElementById("score");
+var scoreSpan = document.getElementById("score")
 var submitButton = document.getElementById("submit");
 
 //start page first page change & questions//
@@ -51,6 +51,11 @@ function startQuiz() {
   var answerC = document.getElementById("answerC");
   var answerD = document.getElementById("answerD");
 
+  // Added if statement to heck if variable "questionIndex" is being used as an index to access the "questionOptions" array. 
+  if (questionIndex >= questionOptions.length) {
+    return;
+  }
+
   questionDisplay.innerHTML = "";
   quizStart.classList.add("hide");
   quizQuestions.classList.remove("hide");
@@ -59,6 +64,7 @@ function startQuiz() {
   answerB.textContent = questionOptions[questionIndex].options[1];
   answerC.textContent = questionOptions[questionIndex].options[2];
   answerD.textContent = questionOptions[questionIndex].options[3];
+
   answerA.addEventListener("click", displayQuestion);
   answerB.addEventListener("click", displayQuestion);
   answerC.addEventListener("click", displayQuestion);
@@ -116,7 +122,7 @@ submitButton.addEventListener("click", function(event) {
 });
 
 function init() {
-  quizTime();
+  //quizTime();
   startQuiz();
 }
 
